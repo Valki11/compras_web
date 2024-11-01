@@ -122,11 +122,14 @@ public class Compras_detalle {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "update  set compras_detallle = ?  where id_compra_detalle = ?;";
+            String query = "update compras_detallle set cantidad= ?, id_compra= ? , id_compra_detalle= ?,id_producto= ?,precio_costo_unitario = ?  where id_compra_detalle = ?;";
             cn.abrir_conexion();
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
-            parametro.setString(1, getid_compra_detalle"());
-            parametro.setInt(2, getId_puesto());
+            parametro.setInt(1, getCantidad());
+            parametro.setInt(2,  getId_compra());
+            parametro.setInt(3,  getId_compra_detalle());
+            parametro.setInt(4,  getId_producto());
+            parametro.setDouble(5,  getPrecio_costo_unitario());
             retorno = parametro.executeUpdate();
             cn.cerrar_conexion();
         } catch (SQLException ex) {
@@ -140,10 +143,10 @@ public class Compras_detalle {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "delete from puestos  where id_puesto = ?;";
+            String query = "delete compras_detalle from   where id_compora_detalle = ?;";
             cn.abrir_conexion();
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
-            parametro.setInt(1, getId_puesto());
+            parametro.setInt(1, getId_compra_detalle());
             retorno = parametro.executeUpdate();
             cn.cerrar_conexion();
         } catch (SQLException ex) {
