@@ -122,13 +122,15 @@ public class Compras {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "update puestos set puesto = ?  where id_puesto = ?;";
+            String query = "update compras set fecha_ingreso = ? , fecha_orden = ? , id_proveedor = ? , no_orden_compra = ? where id_compra = ? ;";
             cn.abrir_conexion();
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
-            parametro.setInt(1,getNo_orden_compra());
-            parametro.setInt(2, getId_proveedor());
-            parametro.setDate(3,getFecha_orden());
-            parametro.setDate(4,getFecha_ingreso());
+            parametro.setDate(1,getFecha_ingreso());
+            parametro.setDate(2,getFecha_orden());
+            parametro.setInt(3, getId_proveedor());
+            parametro.setInt(4 ,getNo_orden_compra());
+            parametro.setInt(5 ,getId_compra());
+
             retorno = parametro.executeUpdate();
             cn.cerrar_conexion();
         } catch (SQLException ex) {

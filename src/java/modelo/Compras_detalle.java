@@ -78,7 +78,7 @@ public class Compras_detalle {
             ResultSet consulta = cn.conexionBD.createStatement().executeQuery(query);
             String encabezado[] = {"id_compra_detalle","id_compra","id_producto","cantidad","precio_costo_unitario"};
             tabla.setColumnIdentifiers(encabezado);
-            String datos[] = new String[2];
+            String datos[] = new String[5];
             while (consulta.next()) {
                 datos[0] = consulta.getString("id_compra_detalle");
                 datos[1] = consulta.getString("id_compra");
@@ -101,13 +101,13 @@ public class Compras_detalle {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "insert into compras_detalle(Id_compra, Id_producto,Cantidad,Precio_costo_unitario) values(?,?,?,?,?);";
+            String query = "insert into compras_detalle(id_compra, id_producto,cantidad,precio_costo_unitario) values(?,?,?,?,?);";
             cn.abrir_conexion();
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
-            parametro.setInt(1, getId_compra_detalle());
-            parametro.setInt(2, getId_compra());
-            parametro.setInt(3, getId_producto());
-            parametro.setInt(4, getCantidad());
+            parametro.setInt(1, getId_compra());
+            parametro.setInt(2, getId_compra_detalle());
+            parametro.setInt(3, getCantidad());
+            parametro.setInt(4, getId_producto());
             parametro.setDouble(5, getPrecio_costo_unitario());
             retorno = parametro.executeUpdate();
             cn.cerrar_conexion();
@@ -122,14 +122,14 @@ public class Compras_detalle {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "update compras_detallle set cantidad= ?, id_compra= ? , id_compra_detalle= ?,id_producto= ?,precio_costo_unitario = ?  where id_compra_detalle = ?;";
+            String query = "update compras_detallle set cantidad = ? , id_compra= ? ,id_producto= ? ,precio_costo_unitario = ?  where id_compra_detalle = ?;";
             cn.abrir_conexion();
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
             parametro.setInt(1, getCantidad());
             parametro.setInt(2,  getId_compra());
-            parametro.setInt(3,  getId_compra_detalle());
-            parametro.setInt(4,  getId_producto());
-            parametro.setDouble(5,  getPrecio_costo_unitario());
+            parametro.setInt(3, getId_producto());
+            parametro.setDouble(4, getPrecio_costo_unitario());
+            parametro.setInt(5, getId_compra_detalle());
             retorno = parametro.executeUpdate();
             cn.cerrar_conexion();
         } catch (SQLException ex) {
@@ -143,7 +143,7 @@ public class Compras_detalle {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "delete compras_detalle from   where id_compora_detalle = ?;";
+            String query = "delete FROM compras_detalle where id_compora_detalle = ?;";
             cn.abrir_conexion();
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
             parametro.setInt(1, getId_compra_detalle());
