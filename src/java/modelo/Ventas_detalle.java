@@ -122,15 +122,14 @@ public class Ventas_detalle {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "update ventas_detalle set cantidad = ?,id_producto = ?,id_venta = ?,id_venta_detalle = ?,precio_unitario = ?   where id_venta_detalle = ?;";
+            String query = "update ventas_detalle set cantidad = ?,id_producto = ?,id_venta = ?, precio_unitario = ? where id_venta_detalle = ?;";
             cn.abrir_conexion();
-            parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
             parametro.setInt(1, getCantidad()); 
             parametro.setInt(2, getId_Producto());
             parametro.setInt(3, getId_Venta());
-            parametro.setInt(4, getId_venta_detalle());
-            parametro.setDouble(5, getPrecio_unitario());
+            parametro.setDouble(4, getPrecio_unitario());
+            parametro.setInt(5, getId_venta_detalle());
             
             retorno = parametro.executeUpdate();
             cn.cerrar_conexion();

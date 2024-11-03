@@ -127,7 +127,7 @@ public class Productos {
                 datos[5] = consulta.getString("imagen");
                 datos[6] = consulta.getString("precio_costo");
                 datos[7] = consulta.getString("precio_venta");
-                datos[7] = consulta.getString("producto");
+                datos[8] = consulta.getString("producto");
                  
                 tabla.addRow(datos);
             }
@@ -169,18 +169,18 @@ public class Productos {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "update productos set descripcion = ?,existencia = ?,fecha_ingreso = ?,id_marca = ?,id_producto= ?,imagen = ?,precio_costo = ?,precio_venta = ?,producto = ?  where id_producto = ?;";
+            String query = "update productos set descripcion = ?,existencia = ?,fecha_ingreso = ?,id_marca = ?,imagen = ?,precio_costo = ?,precio_venta = ?,producto = ? where id_producto = ?;";
             cn.abrir_conexion();
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
             parametro.setString(1, getDescripcion());
             parametro.setInt(2, getExistencia());
             parametro.setDate(3, getFecha_ingreso());
             parametro.setInt(4, getId_Marca());
-            parametro.setInt(5, getId_Producto());
-            parametro.setString(6, getImagen());
-            parametro.setDouble(7, getPrecio_costo());
-            parametro.setDouble(8, getPrecio_venta());
-            parametro.setString(9, getProducto());
+            parametro.setString(5, getImagen());
+            parametro.setDouble(6, getPrecio_costo());
+            parametro.setDouble(7, getPrecio_venta());
+            parametro.setString(8, getProducto());
+            parametro.setInt(9, getId_Producto());
             retorno = parametro.executeUpdate();
             cn.cerrar_conexion();
         } catch (SQLException ex) {

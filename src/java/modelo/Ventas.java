@@ -148,17 +148,16 @@ public class Ventas {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "update ventas set fecha_factura = ?, fecha_ingreso = ? ,id_cliente = ? ,id_empleado = ?,id_venta = ?,no_factura = ?,serie = ?   where id_venta = ?;";
+            String query = "update ventas set fecha_factura = ?, fecha_ingreso = ? ,id_cliente = ? ,id_empleado = ?,no_factura = ?,serie = ? where id_venta = ?;";
             cn.abrir_conexion();
-            parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
             parametro.setDate(1, getFecha_factura()); 
             parametro.setDate(2, getFecha_ingreso());
             parametro.setInt(3, getId_Cliente());
             parametro.setInt(4, getId_empleado());
-            parametro.setInt(5, getId_Venta());
-            parametro.setInt(6, getNo_factura());
-            parametro.setInt(7, getSerie());
+            parametro.setInt(5, getNo_factura());
+            parametro.setInt(6, getSerie());
+            parametro.setInt(7, getId_Venta());
             
             retorno = parametro.executeUpdate();
             cn.cerrar_conexion();
@@ -173,7 +172,7 @@ public class Ventas {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "delete from ventas  where id_venta = ?;";
+            String query = "delete from ventas where id_venta = ?;";
             cn.abrir_conexion();
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
             parametro.setInt(1, getId_Cliente());
